@@ -1,0 +1,43 @@
+############################# BASIC SETTINGS ###################################
+
+readonly SCRIPT_NAME="$(basename ${0})"
+
+readonly FALSE='false'
+readonly TRUE='true'
+
+### Return codes
+
+readonly SUCCESS_CODE=0
+readonly SETTINGS_ERROR=1
+readonly CANCEL_CODE=2
+
+readonly DEFAULT_IMAGES_HUB=${ESGF_IMAGES_HUB-esgfhub}
+readonly DEFAULT_PACKAGE_REPO=${ESGF_REPO-"http://distrib-coffee.ipsl.jussieu.fr/pub/esgf"}
+
+readonly ESGF_IMAGE_DIR_NAMES=('configure' 'postgres' 'solr' 'tomcat' 'django' 'setup' 'postgres-esgcet' 'orp' 'index-node' 'idp-node' 'tds' 'publisher' 'cog' 'auth' 'slcs' 'proxy')
+
+readonly ESGF_IMAGE_PREFIX='esgf-'
+
+################################ FUNCTIONS #####################################
+
+# return 0 if user answer yes, return 1 otherwise.
+function ask_binary_question
+{
+  while true
+  do
+    echo -n "${1} (y[es]/n[o]): "
+    read reply
+  
+    case $(echo $reply | tr '[A-Z]' '[a-z]') in
+      y|yes)
+        return 0
+        ;;
+      n|no)
+        return 1
+        ;;
+      *) echo "just y[es] or n[o] !"
+         ;;  
+    esac
+  done
+}
+
