@@ -152,6 +152,7 @@ display 'running the tests' 'info'
 cd "${TEST_DIR_PATH}"
 singularity exec "${SINGULARITY_ENV_FILE_PATH}" python2 esgf-test.py ${TESTS} \
   -v --nocapture --nologcapture \
+  --rednose --force-color --hide-skips \
   --tc-file "${CONFIG_FILE_PATH}" \
   --tc="${slcs_secret_conf}" \
   --tc="${cog_secret_conf}"
