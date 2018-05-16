@@ -8,12 +8,14 @@ readonly BASE_URL='http://mirrors.jenkins-ci.org/war-stable/latest'
 readonly JENKINS_HASH_URL="${BASE_URL}/jenkins.war.sha256"
 readonly JENKINS_WAR_URL="${BASE_URL}/jenkins.war"
 
+readonly WORKSPACE_PATH="${WORKSPACE}" # Set by Jenkins
+
 readonly WEBAPP_DIR_PATH='/usr/share/tomcat/webapps'
 readonly JENKINS_WAR_FILENAME='jenkins.war'
-readonly JENKINS_WAR_TMP_FILE_PATH="/tmp/${JENKINS_WAR_FILENAME}"
+readonly JENKINS_WAR_TMP_FILE_PATH="/${WORKSPACE_PATH}/${JENKINS_WAR_FILENAME}"
 readonly JENKINS_WAR_FILE_PATH="${WEBAPP_DIR_PATH}/${JENKINS_WAR_FILENAME}"
 
-readonly BACKUP_DIR_PATH="${HOME}/jenkins_old_version"
+readonly BACKUP_DIR_PATH="${WORKSPACE_PATH}/jenkins_old_version"
 
 cd "${WEBAPP_DIR_PATH}"
 

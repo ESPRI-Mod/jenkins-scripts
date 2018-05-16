@@ -4,15 +4,12 @@ set -e
 set -u
 set -o pipefail
 
-BASE_DIR_PATH="$(pwd)"
-SCRIPT_DIR_PATH="$(dirname $0)"; cd "${SCRIPT_DIR_PATH}"
-readonly SCRIPT_DIR_PATH="$(pwd)" ; cd "${BASE_DIR_PATH}"
-
+readonly WORKSPACE_PATH="${WORKSPACE}" # Set by Jenkins
 readonly COMMON_DIR_PATH="${JENKINS_HOME}/esgf" # Set by Jenkins
-readonly SCRIPT_FILE_PATH="${COMMON_DIR_PATH}/jenkins-scripts/autoupdate_plugins_job.sh"
+readonly SCRIPT_FILE_PATH="${WORKSPACE_PATH}/jenkins-scripts/autoupdate_plugins_job.sh"
 
 readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.ipslbuild_credentials.secret"
-readonly JENKINS_JAR_PATH="${COMMON_DIR_PATH}/jenkins-cli.jar"
+readonly JENKINS_JAR_PATH="${WORKSPACE_PATH}/jenkins-cli.jar"
 readonly JENKINS_SERVER_URL='https://localhost:8443/jenkins'
 
 function execute_cmd

@@ -2,10 +2,6 @@
 
 ################################# SETTINGS #####################################
 
-BASE_DIR_PATH="$(pwd)"
-SCRIPT_DIR_PATH="$(dirname $0)"; cd "${SCRIPT_DIR_PATH}"
-SCRIPT_DIR_PATH="$(pwd)" ; cd "${BASE_DIR_PATH}"
-
 ### BASH
 
 set -o pipefail
