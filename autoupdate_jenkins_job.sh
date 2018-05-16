@@ -34,6 +34,8 @@ if [ $returned_code -ne 0 ]; then
   echo "> run a nohup sequence of commands."
   date >> "${BACKUP_DIR_PATH}/nohup.log"
   nohup sh -c "sleep 20 ; mv -f ${JENKINS_WAR_TMP_FILE_PATH} ${JENKINS_WAR_FILE_PATH}" >> "${BACKUP_DIR_PATH}/nohup.log" 2>&1 &
+  exit 0
 else
   echo "> current Jenkins is up to date: nothing to do."
+  exit 0
 fi
