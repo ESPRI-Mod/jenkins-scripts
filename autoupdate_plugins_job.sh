@@ -38,7 +38,8 @@ function main
     display "upgrading: ${plugin_list[*]}." 'info'
     execute_cmd "install-plugin ${plugin_list}"
     display 'restarting Jenkins.' 'info'
-    nohup sh -c "source \"${SCRIPT_FILE_PATH}\" ; execute_cmd 'safe-restart'" > /dev/null 2>&1 &
-    exit $?
+    # The BUILD_ID=whatever is the trick that cancel Jenkins to kill the processes spawned by the job.
+    BUILD_ID=dontKillMe nohup bash -c "source \"${SCRIPT_FILE_PATH}\" ; sleep 10 ; execute_cmd 'safe-restart'" > "${WORKSPACE_PATH}/log" 2>&1 &
+    exit 0
   fi
 }
