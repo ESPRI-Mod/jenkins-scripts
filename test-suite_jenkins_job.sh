@@ -11,6 +11,11 @@ set -u
 
 export WORKSPACE_PATH="${WORKSPACE}" # Set by Jenkins
 export COMMON_DIR_PATH="${JENKINS_HOME}/esgf" # Set by Jenkins
+export SCRIPT_DIR_PATH="${WORKSPACE_PATH}/jenkins-scripts"
+
+### COMMON
+
+source "${SCRIPT_DIR_PATH}/common"
 
 ### ESGF DOCKER
 
@@ -51,29 +56,6 @@ function destructor
   display 'stop & delete the containers' 'info'
   docker-compose down -v
   cd - > /dev/null
-}
-
-function display
-{
-  case "${2}" in
-    'info')
-      color='\e[34m'
-      tag='[INFO]';;
-    'warn')
-      color='\e[33m'
-      tag='[WARN]';;
-    'error')
-      color='\e[31m'
-      tag='[ERROR]';;
-    'debug')
-      color='\e[35m'
-      tag='[DEBUG]';;
-    *)
-      color='\e[39m'
-      tag='[UNSUPPORTED]';;
-  esac
-  
-  echo -e "${color}${tag} $1\e[0m"
 }
 
 ################################### MAIN #######################################
