@@ -27,6 +27,7 @@ export ESGF_HOSTNAME="$(hostname)"
 export ESGF_CONFIG="${WORKSPACE}/config"
 export ESGF_DATA="${WORKSPACE}/data"
 
+export ESGF_DOCKER_GITHUB_URL='https://github.com/ESGF/esgf-docker.git'
 export ESGF_DOCKER_REPO_PATH="${WORKSPACE_PATH}/esgf-docker"
 
 ### ESGF DOCKER SECRETS
@@ -60,19 +61,29 @@ function destructor
 
 ################################### MAIN #######################################
 
-# NOTES:
-# - $ESGF_DOCKER_REPO_PATH is supposed to be up to date.
-
 set -e
 
 mkdir -p "${ESGF_CONFIG}"
 mkdir -p "${ESGF_DATA}"
 cd "${WORKSPACE_PATH}"
 
+
+# Update the esgf-docker repo.
+if [ -d "${ESGF_DOCKER_REPO_PATH}" ]; then
+  cd "${ESGF_DOCKER_REPO_PATH}"
+  display 'update esgf-docker repo' 'info'
+  git checkout master
+  git pull origin master
+  cd - > /dev/null
+else
+  display "clone esgf-docker" 'info'
+  git clone "${ESGF_DOCKER_GITHUB_URL}" "${ESGF_DOCKER_REPO_PATH}"
+fi
+
 # Update the esgf-test-suite repo.
 if [ -d "${ESGF_TEST_SUITE_REPO_PATH}" ]; then
   cd "${ESGF_TEST_SUITE_REPO_PATH}"
-  display 'update esgf-test-suite' 'info'
+  display 'update esgf-test-suite repo' 'info'
   git checkout master
   git pull origin master
   cd - > /dev/null
