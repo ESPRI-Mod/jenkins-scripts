@@ -36,7 +36,7 @@ if [ $returned_code -ne 0 ]; then
   cp -fp "${JENKINS_WAR_FILE_PATH}" "${BACKUP_DIR_PATH}"
   display 'delete the previous Jenkins installation.' 'info'
   rm -fr "${JENKINS_WAR_FILE_PATH}" "$(basename -s '.war' ${JENKINS_WAR_FILE_PATH})"
-  display 'reinstall Jenkins (nohup)'
+  display 'reinstall Jenkins (nohup)' 'info'
   date >> "${BACKUP_DIR_PATH}/nohup.log"
   # The BUILD_ID=whatever is the trick that cancel Jenkins to kill the processes spawned by the job.
   BUILD_ID=dontKillMe nohup bash -c "sleep 10 ; mv -f ${JENKINS_WAR_TMP_FILE_PATH} ${JENKINS_WAR_FILE_PATH}" >> "${BACKUP_DIR_PATH}/nohup.log" 2>&1 &
