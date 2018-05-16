@@ -13,7 +13,7 @@ readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.ipslbuild_credentials.secret"
 readonly JENKINS_JAR_PATH="${WORKSPACE_PATH}/jenkins-cli.jar"
 readonly JENKINS_SERVER_URL='https://localhost:8443/jenkins'
 
-source "${SCRIPT_DIR_PATH/common}"
+source "${SCRIPT_DIR_PATH}/common"
 
 function execute_cmd
 {
