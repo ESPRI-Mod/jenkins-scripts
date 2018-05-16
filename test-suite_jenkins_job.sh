@@ -78,7 +78,7 @@ if [ -d "${ESGF_DOCKER_REPO_PATH}" ]; then
   cd - > /dev/null
 else
   display "clone esgf-docker" 'info'
-  git clone "${ESGF_DOCKER_GITHUB_URL}" "${ESGF_DOCKER_REPO_PATH}"
+  git clone -b ${ESGF_DOCKER_REPO_BRANCH} "${ESGF_DOCKER_GITHUB_URL}" "${ESGF_DOCKER_REPO_PATH}"
 fi
 
 # Update the esgf-test-suite repo.
