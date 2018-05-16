@@ -29,6 +29,7 @@ export ESGF_DATA="${WORKSPACE}/data"
 
 export ESGF_DOCKER_GITHUB_URL='https://github.com/ESGF/esgf-docker.git'
 export ESGF_DOCKER_REPO_PATH="${WORKSPACE_PATH}/esgf-docker"
+export ESGF_DOCKER_REPO_BRANCH=${2-'devel'}
 
 ### ESGF DOCKER SECRETS
 
@@ -72,8 +73,8 @@ cd "${WORKSPACE_PATH}"
 if [ -d "${ESGF_DOCKER_REPO_PATH}" ]; then
   cd "${ESGF_DOCKER_REPO_PATH}"
   display 'update esgf-docker repo' 'info'
-  git checkout master
-  git pull origin master
+  git checkout ${ESGF_DOCKER_REPO_BRANCH}
+  git pull origin ${ESGF_DOCKER_REPO_BRANCH}
   cd - > /dev/null
 else
   display "clone esgf-docker" 'info'
