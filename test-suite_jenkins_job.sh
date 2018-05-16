@@ -24,8 +24,8 @@ export ESGF_HUB='esgfhub'
 export ESGF_PREFIX=''
 
 export ESGF_HOSTNAME="$(hostname)"
-export ESGF_CONFIG="${WORKSPACE}/config"
-export ESGF_DATA="${WORKSPACE}/data"
+export ESGF_CONFIG="${WORKSPACE_PATH}/config"
+export ESGF_DATA="${WORKSPACE_PATH}/data"
 
 export ESGF_DOCKER_GITHUB_URL='https://github.com/ESGF/esgf-docker.git'
 export ESGF_DOCKER_REPO_PATH="${WORKSPACE_PATH}/esgf-docker"
@@ -68,16 +68,15 @@ mkdir -p "${ESGF_CONFIG}"
 mkdir -p "${ESGF_DATA}"
 cd "${WORKSPACE_PATH}"
 
-
 # Update the esgf-docker repo.
 if [ -d "${ESGF_DOCKER_REPO_PATH}" ]; then
   cd "${ESGF_DOCKER_REPO_PATH}"
-  display 'update esgf-docker repo' 'info'
+  display "update esgf-docker repo branch ${ESGF_DOCKER_REPO_BRANCH}" 'info'
   git checkout ${ESGF_DOCKER_REPO_BRANCH}
   git pull origin ${ESGF_DOCKER_REPO_BRANCH}
   cd - > /dev/null
 else
-  display "clone esgf-docker" 'info'
+  display "clone esgf-docker repo branch ${ESGF_DOCKER_REPO_BRANCH}" 'info'
   git clone -b ${ESGF_DOCKER_REPO_BRANCH} "${ESGF_DOCKER_GITHUB_URL}" "${ESGF_DOCKER_REPO_PATH}"
 fi
 
@@ -89,7 +88,7 @@ if [ -d "${ESGF_TEST_SUITE_REPO_PATH}" ]; then
   git pull origin master
   cd - > /dev/null
 else
-  display "clone esgf-test-suite" 'info'
+  display "clone esgf-test-suite repo" 'info'
   git clone "${ESGF_TEST_SUITE_GITHUB_URL}" "${ESGF_TEST_SUITE_REPO_PATH}"
 fi
 
@@ -122,7 +121,6 @@ display 'creating trust bundle' 'info'
 docker-compose run -u $UID esgf-setup create-trust-bundle
 chmod +r "${ESGF_CONFIG}/certificates/hostcert/hostcert.key"
 chmod +r "${ESGF_CONFIG}/certificates/slcsca/ca.key"
-
 
 display 'starting the esgf containers' 'info'
 set +e # The script manages the failures.
