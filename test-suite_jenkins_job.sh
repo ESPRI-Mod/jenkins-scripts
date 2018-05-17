@@ -36,7 +36,7 @@ export ESGF_DOCKER_REPO_BRANCH=${2-'devel'}
 export ROOT_ADMIN_SECRET_FILE_PATH="${ESGF_CONFIG}/secrets/rootadmin-password"
 
 # Timeout before the ESGF containers to be up.
-export STARTING_TIME=90
+export STARTING_TIME=240
 
 ### ESGF TEST SUITE
 
