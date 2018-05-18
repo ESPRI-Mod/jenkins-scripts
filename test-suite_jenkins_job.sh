@@ -35,8 +35,8 @@ export ESGF_DOCKER_REPO_BRANCH=${2-'devel'}
 
 export ROOT_ADMIN_SECRET_FILE_PATH="${ESGF_CONFIG}/secrets/rootadmin-password"
 
-# Timeout before the ESGF containers to be up.
-export STARTING_TIME=240
+# Amount of time before running the test suite.
+export STARTING_TIME=${3-240}
 
 ### ESGF TEST SUITE
 
@@ -60,9 +60,18 @@ function destructor
   cd - > /dev/null
 }
 
+function usage
+{
+  echo -e "usage:\n\
+  \n$(basename ${0}) [image version] [repo branch] [time before testing]\n"
+}
+
+
 ################################### MAIN #######################################
 
 set -e
+
+usage
 
 mkdir -p "${ESGF_CONFIG}"
 mkdir -p "${ESGF_DATA}"
