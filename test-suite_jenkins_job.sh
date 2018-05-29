@@ -34,7 +34,7 @@ export ESGF_DOCKER_REPO_PATH="${WORKSPACE_PATH}/esgf-docker"
 export ROOT_ADMIN_SECRET_FILE_PATH="${ESGF_CONFIG}/secrets/rootadmin-password"
 
 # Amount of time before running the test suite.
-export STARTING_TIME=${3-240}
+export STARTING_TIME=${2-240}
 
 ### ESGF TEST SUITE
 
