@@ -27,9 +27,7 @@ export ESGF_HOSTNAME="$(hostname)"
 export ESGF_CONFIG="${WORKSPACE_PATH}/config"
 export ESGF_DATA="${WORKSPACE_PATH}/data"
 
-export ESGF_DOCKER_GITHUB_URL='https://github.com/ESGF/esgf-docker.git'
 export ESGF_DOCKER_REPO_PATH="${WORKSPACE_PATH}/esgf-docker"
-export ESGF_DOCKER_REPO_BRANCH=${2-'devel'}
 
 ### ESGF DOCKER SECRETS
 
@@ -63,9 +61,8 @@ function destructor
 function usage
 {
   echo -e "usage:\n\
-  \n$(basename ${0}) [image version] [repo branch] [time before testing]\n"
+  \n$(basename ${0}) [image version] [time before testing]\n"
 }
-
 
 ################################### MAIN #######################################
 
@@ -76,18 +73,6 @@ usage
 mkdir -p "${ESGF_CONFIG}"
 mkdir -p "${ESGF_DATA}"
 cd "${WORKSPACE_PATH}"
-
-# Update the esgf-docker repo.
-if [ -d "${ESGF_DOCKER_REPO_PATH}" ]; then
-  cd "${ESGF_DOCKER_REPO_PATH}"
-  display "update esgf-docker repo branch ${ESGF_DOCKER_REPO_BRANCH}" 'info'
-  git checkout ${ESGF_DOCKER_REPO_BRANCH}
-  git pull origin ${ESGF_DOCKER_REPO_BRANCH}
-  cd - > /dev/null
-else
-  display "clone esgf-docker repo branch ${ESGF_DOCKER_REPO_BRANCH}" 'info'
-  git clone -b ${ESGF_DOCKER_REPO_BRANCH} "${ESGF_DOCKER_GITHUB_URL}" "${ESGF_DOCKER_REPO_PATH}"
-fi
 
 # Update the esgf-test-suite repo.
 if [ -d "${ESGF_TEST_SUITE_REPO_PATH}" ]; then
