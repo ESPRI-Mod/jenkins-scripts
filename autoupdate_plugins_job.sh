@@ -9,7 +9,7 @@ readonly COMMON_DIR_PATH="${JENKINS_HOME}/esgf" # Set by Jenkins
 readonly SCRIPT_DIR_PATH="${WORKSPACE_PATH}/jenkins-scripts"
 readonly SCRIPT_FILE_PATH="${SCRIPT_DIR_PATH}/autoupdate_plugins_job.sh"
 
-readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.ipslbuild_credentials.secret"
+readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.jenkins_token.secret"
 readonly JENKINS_JAR_PATH="${WORKSPACE_PATH}/jenkins-cli.jar"
 readonly JENKINS_SERVER_URL='https://localhost:8443/jenkins'
 
