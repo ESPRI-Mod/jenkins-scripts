@@ -11,13 +11,14 @@ readonly SCRIPT_FILE_PATH="${SCRIPT_DIR_PATH}/autoupdate_plugins_job.sh"
 
 readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.jenkins_token.secret"
 readonly JENKINS_JAR_PATH="${WORKSPACE_PATH}/jenkins-cli.jar"
-readonly JENKINS_SERVER_URL='http://esgf-build.ipsl.upmc.fr/jenkins'
+readonly JENKINS_SERVER_URL='https://esgf-build.ipsl.upmc.fr/jenkins'
+readonly JENKINS_CLI_SERVER_URL='http://localhost:8080/jenkins'
 
 source "${SCRIPT_DIR_PATH}/common"
 
 function execute_cmd
 {
-  java -jar "${JENKINS_JAR_PATH}" -s "${JENKINS_SERVER_URL}" -noCertificateCheck -noKeyAuth -auth "$(cat ${CREDENTIAL_FILE_PATH})" ${1}
+  java -jar "${JENKINS_JAR_PATH}" -s "${JENKINS_CLI_SERVER_URL}" -noKeyAuth -auth "$(cat ${CREDENTIAL_FILE_PATH})" ${1}
 }
 
 function main
