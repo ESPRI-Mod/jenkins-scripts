@@ -24,7 +24,7 @@ function main
 {
   display 'downloading jenkins-cli.jar' 'info'
   # Always download the last version of jenkins-cli.jar .
-  wget --no-check-certificate -q -O "${JENKINS_JAR_PATH}" https://localhost:8443/jenkins/jnlpJars/jenkins-cli.jar
+  wget --no-check-certificate -q -O "${JENKINS_JAR_PATH}" ${JENKINS_SERVER_URL}/jnlpJars/jenkins-cli.jar
   display 'fetching the list of plugins.' 'info'
   set +u
   set +e
