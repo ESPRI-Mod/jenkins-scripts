@@ -11,20 +11,21 @@ readonly SCRIPT_FILE_PATH="${SCRIPT_DIR_PATH}/autoupdate_plugins_job.sh"
 
 readonly CREDENTIAL_FILE_PATH="${COMMON_DIR_PATH}/.jenkins_token.secret"
 readonly JENKINS_JAR_PATH="${WORKSPACE_PATH}/jenkins-cli.jar"
-readonly JENKINS_SERVER_URL='https://localhost:8443/jenkins'
+readonly JENKINS_SERVER_URL='https://esgf-build.ipsl.upmc.fr/jenkins'
+readonly JENKINS_CLI_SERVER_URL='http://localhost:8080/jenkins'
 
 source "${SCRIPT_DIR_PATH}/common"
 
 function execute_cmd
 {
-  java -jar "${JENKINS_JAR_PATH}" -s "${JENKINS_SERVER_URL}" -noCertificateCheck -noKeyAuth -auth "$(cat ${CREDENTIAL_FILE_PATH})" ${1}
+  java -jar "${JENKINS_JAR_PATH}" -s "${JENKINS_CLI_SERVER_URL}" -noKeyAuth -auth "$(cat ${CREDENTIAL_FILE_PATH})" ${1}
 }
 
 function main
 {
   display 'downloading jenkins-cli.jar' 'info'
   # Always download the last version of jenkins-cli.jar .
-  wget --no-check-certificate -q -O "${JENKINS_JAR_PATH}" https://localhost:8443/jenkins/jnlpJars/jenkins-cli.jar
+  wget --no-check-certificate -q -O "${JENKINS_JAR_PATH}" ${JENKINS_SERVER_URL}/jnlpJars/jenkins-cli.jar
   display 'fetching the list of plugins.' 'info'
   set +u
   set +e

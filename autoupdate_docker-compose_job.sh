@@ -4,8 +4,7 @@ set -u
 set -e
 set -o pipefail
 
-#WORKSPACE_PATH="${WORKSPACE}" # Set by Jenkins.
-readonly WORKSPACE_PATH="/home/tomcat/tmp" # DEBUG
+readonly WORKSPACE_PATH="${WORKSPACE}" # Set by Jenkins.
 readonly SCRIPT_DIR_PATH="${WORKSPACE_PATH}/jenkins-scripts"
 readonly DOCKER_COMPOSE_FILE_PATH="${HOME}/local/bin/docker-compose"
 readonly DOCKER_COMPOSE_PREVIOUS_FILE_PATH="${DOCKER_COMPOSE_FILE_PATH}.previous"
